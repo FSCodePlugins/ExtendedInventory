@@ -1,0 +1,5 @@
+NoPermission: "%PREFIX% &cYou do not have permissions to do that!"
+NoPlayer: "%PREFIX% &cThis action can only be performed by players!"
+Inventory:
+  NoMorePages: "%PREFIX% &7There are no more pages available!"
+  FirstPage: "%PREFIX% &7You are already on the first page!"

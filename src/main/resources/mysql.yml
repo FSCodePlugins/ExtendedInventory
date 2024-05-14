@@ -1,0 +1,12 @@
+enable: false
+url: "jdbc:mysql://localhost:3306/test"
+username: "root"
+password: ""
+
+# Only change the following settings if you know what you are doing.
+# Default settings will result in a perfectly functioning plugin in most of the time.
+ExpertSettings:
+  DriverClass: "com.mysql.jdbc.Driver"
+  MinimumConnections: 1
+  MaximumConnections: 5
+  ConnectionTimeout: 20000
