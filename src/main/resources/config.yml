@@ -1,5 +1,4 @@
 Prefix: "&7[&6EInv&7] |"
-DebuggingMode: false
 
 # If this option is enabled, the hotbar items will also be changed by switching pages
 IncludeHotbarItems: false

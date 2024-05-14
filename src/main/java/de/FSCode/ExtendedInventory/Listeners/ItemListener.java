@@ -23,6 +23,7 @@ public class ItemListener extends AbstractGListener {
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
 
+            if(!validateItem(e.getCurrentItem())) return;
             if(e.getCurrentItem().getItemMeta().getLocalizedName().equals(GItems.PREVIOUS_PAGE.getLocalizedName())) {
                 if(getPlugin().getInventoryHandler().getCurrentPage(p.getUniqueId()) == 0) {
                     p.sendMessage(GMessages.ALREADY_FIRST_PAGE.getMessage());
