@@ -4,9 +4,9 @@ import de.FSCode.ExtendedInventory.MySQL.GCallback;
 import de.FSCode.ExtendedInventory.Utilities.AbstractGInventoryHandler;
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class FlatFileInventoryManager extends AbstractGInventoryHandler {
 
     private final HashMap<UUID, SpigotFileConfiguration> cachedConfigurations = new HashMap<>();
 
-    public FlatFileInventoryManager(IMainframe plugin) {
+    public FlatFileInventoryManager(IMainframe<JavaPlugin> plugin) {
         super(plugin);
     }
 

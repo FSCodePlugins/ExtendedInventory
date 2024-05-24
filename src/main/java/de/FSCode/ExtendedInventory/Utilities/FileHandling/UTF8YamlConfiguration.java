@@ -12,9 +12,9 @@ import java.io.*;
 public class UTF8YamlConfiguration extends YamlConfiguration {
 
     private final File file;
-    @Getter private final IMainframe plugin;
+    @Getter private final IMainframe<?> plugin;
 
-    public UTF8YamlConfiguration(File file, IMainframe plugin) {
+    public UTF8YamlConfiguration(File file, IMainframe<?> plugin) {
         this.file = file;
         this.plugin = plugin;
     }

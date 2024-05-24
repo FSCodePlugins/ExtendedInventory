@@ -4,6 +4,7 @@ import de.FSCode.ExtendedInventory.Utilities.Exceptions.FileGenerationException;
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +16,10 @@ import java.nio.file.StandardCopyOption;
 public abstract class AbstractGFileConfiguration<E> implements IGFileConfiguration<E> {
 
     private final GFiles gFile;
-    private final IMainframe plugin;
+    private final IMainframe<JavaPlugin> plugin;
     @Setter private E configuration;
 
-    public AbstractGFileConfiguration(GFiles gFile, IMainframe plugin) {
+    public AbstractGFileConfiguration(GFiles gFile, IMainframe<JavaPlugin> plugin) {
         this.gFile = gFile;
         this.plugin = plugin;
         if(gFile.getFile() == null) GFiles.loadAllFiles(plugin.getPluginFolder());

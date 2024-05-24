@@ -2,6 +2,7 @@ package de.FSCode.ExtendedInventory.Utilities.FileHandling;
 
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -11,10 +12,10 @@ import java.util.Date;
 public class GLogging {
 
     private final SpigotFileConfiguration logConfiguration;
-    private final IMainframe plugin;
+    private final IMainframe<JavaPlugin> plugin;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public GLogging(IMainframe plugin) {
+    public GLogging(IMainframe<JavaPlugin> plugin) {
         this.plugin = plugin;
         this.logConfiguration = new SpigotFileConfiguration(plugin, GFiles.LOGS);
     }

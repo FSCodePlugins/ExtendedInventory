@@ -9,10 +9,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class ItemListener extends AbstractGListener {
 
-    public ItemListener(IMainframe plugin) {
+    public ItemListener(IMainframe<JavaPlugin> plugin) {
         super(plugin);
     }
 

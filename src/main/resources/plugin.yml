@@ -6,3 +6,5 @@ prefix: EInv
 authors: [FSCode]
 description: Extend the functionality and size of your inventory
 commands:
+  einv:
+    description:

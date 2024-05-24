@@ -6,12 +6,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
 public class InventoryDropListener extends AbstractGListener {
 
-    public InventoryDropListener(IMainframe plugin) {
+    public InventoryDropListener(IMainframe<JavaPlugin> plugin) {
         super(plugin);
     }
 

@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public abstract class AbstractGInventoryHandler {
 
     protected final ItemStackSerialization serializer;
 
-    private final IMainframe plugin;
+    private final IMainframe<JavaPlugin> plugin;
     private final boolean includeHotbar;
 
     public AbstractGInventoryHandler(IMainframe plugin) {
@@ -109,7 +110,7 @@ public abstract class AbstractGInventoryHandler {
     }
 
     protected void executeAsync(Runnable runnable) {
-        Bukkit.getScheduler().runTaskAsynchronously(getPlugin().getJavaPlugin(), runnable);
+        Bukkit.getScheduler().runTaskAsynchronously(getPlugin().getPluginInstance(), runnable);
     }
 
     public void save(Player player, boolean async) throws SQLException, IOException {

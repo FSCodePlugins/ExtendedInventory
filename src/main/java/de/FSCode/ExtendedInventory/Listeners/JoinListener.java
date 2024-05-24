@@ -6,13 +6,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class JoinListener extends AbstractGListener {
 
-    public JoinListener(IMainframe plugin) {
+    public JoinListener(IMainframe<JavaPlugin> plugin) {
         super(plugin);
     }
 
@@ -21,7 +22,7 @@ public class JoinListener extends AbstractGListener {
         Player p = e.getPlayer();
         getPlugin().getInventoryHandler().load(p);
         getPlugin().getInventoryHandler().setControlItems(p);
-        Bukkit.getScheduler().runTaskAsynchronously(getPlugin().getJavaPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(getPlugin().getPluginInstance(), () -> {
             for(int i = 0; i <= 10; i++) {
                 if(p.isOnline() && p.hasPermission("extendedinventory.pages." + i))
                     getPlugin().getInventoryHandler().setAllowedPages(p.getUniqueId(), i);

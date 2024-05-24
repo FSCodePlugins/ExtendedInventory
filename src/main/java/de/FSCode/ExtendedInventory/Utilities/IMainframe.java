@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.InputStream;
 
-public interface IMainframe {
+public interface IMainframe<T> {
 
     public void sendConsoleMessage(String message);
 
@@ -18,10 +18,12 @@ public interface IMainframe {
 
     public GLogging getLogging();
 
-    public JavaPlugin getJavaPlugin();
+    public T getPluginInstance();
 
     public ConnectionManager getSQL();
 
     public AbstractGInventoryHandler getInventoryHandler();
+
+    public boolean reload();
 
 }

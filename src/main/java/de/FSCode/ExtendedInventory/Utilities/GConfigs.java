@@ -2,13 +2,14 @@ package de.FSCode.ExtendedInventory.Utilities;
 
 import de.FSCode.ExtendedInventory.Utilities.FileHandling.SpigotFileConfiguration;
 import lombok.Getter;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public enum GConfigs {
 
     INCLUDE_HOTBAR("IncludeHotbarItems"),
     PREFIX("Prefix");
 
-    @Getter private static IMainframe plugin;
+    @Getter private static IMainframe<JavaPlugin> plugin;
 
     private final String path;
     private Object value;

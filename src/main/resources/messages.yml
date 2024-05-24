@@ -1,5 +1,9 @@
 NoPermission: "%PREFIX% &cYou do not have permissions to do that!"
 NoPlayer: "%PREFIX% &cThis action can only be performed by players!"
+Commands:
+  NoCommand: "%PREFIX% &cUnknown command!"
+  WrongUsage: "%PREFIX% &7Wrong usage! -> %USAGE%"
+  Reload: "%PREFIX% &ePlugin has been reloaded!"
 Inventory:
   NoMorePages: "%PREFIX% &7There are no more pages available!"
   FirstPage: "%PREFIX% &7You are already on the first page!"

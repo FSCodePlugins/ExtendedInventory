@@ -6,6 +6,7 @@ import de.FSCode.ExtendedInventory.Utilities.Exceptions.SQLInitializeException;
 import de.FSCode.ExtendedInventory.Utilities.FileHandling.SpigotFileConfiguration;
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 @Getter
 public class ConnectionManager {
 
-    private final IMainframe plugin;
+    private final IMainframe<JavaPlugin> plugin;
     private final String url;
     private final String user;
     private final String password;
@@ -26,7 +27,7 @@ public class ConnectionManager {
 
     private HikariDataSource dataSource;
 
-    public ConnectionManager(IMainframe plugin, String url, String user, String password, String driverClass, int minConnections, int maxConnections, long timeout) throws SQLInitializeException {
+    public ConnectionManager(IMainframe<JavaPlugin> plugin, String url, String user, String password, String driverClass, int minConnections, int maxConnections, long timeout) throws SQLInitializeException {
         this.url = url;
         this.user = user;
         this.password = password;
@@ -44,7 +45,7 @@ public class ConnectionManager {
         }
     }
 
-    public ConnectionManager(IMainframe plugin, SpigotFileConfiguration configuration) throws SQLInitializeException {
+    public ConnectionManager(IMainframe<JavaPlugin> plugin, SpigotFileConfiguration configuration) throws SQLInitializeException {
         this(plugin,
                 configuration.getString("url"),
                 configuration.getString("username"),

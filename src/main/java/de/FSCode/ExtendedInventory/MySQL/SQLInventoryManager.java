@@ -5,6 +5,7 @@ import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class SQLInventoryManager extends AbstractGInventoryHandler {
 
     private final ConnectionManager connectionManager;
 
-    public SQLInventoryManager(IMainframe plugin) {
+    public SQLInventoryManager(IMainframe<JavaPlugin> plugin) {
         super(plugin);
         this.connectionManager = plugin.getSQL();
     }

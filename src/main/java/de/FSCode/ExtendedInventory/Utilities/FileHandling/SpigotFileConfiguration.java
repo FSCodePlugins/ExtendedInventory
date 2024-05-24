@@ -5,7 +5,9 @@ import de.FSCode.ExtendedInventory.Utilities.Exceptions.PathDoesNotExistExceptio
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 @Getter
 public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConfiguration> {
 
-    public SpigotFileConfiguration(IMainframe plugin, GFiles gFile) {
+    public SpigotFileConfiguration(IMainframe<JavaPlugin> plugin, GFiles gFile) {
         super(gFile, plugin);
         try {
             saveResource();
@@ -32,9 +34,14 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
 
     @Override
     public String getString(String path) {
+        return getStringForSetup(path, null);
+    }
+
+    @Override
+    public String getStringForSetup(String path, String fallback) {
         try {
-            return validate(path).getString(path);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, fallback).getString(path);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
@@ -43,8 +50,8 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     @Override
     public Collection<String> getSection(String path) {
         try {
-            return validate(path).getConfigurationSection(path).getKeys(false);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, null).getConfigurationSection(path).getKeys(false);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
@@ -53,8 +60,8 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     @Override
     public Boolean getBoolean(String path) {
         try {
-            return validate(path).getBoolean(path);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, null).getBoolean(path);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
@@ -63,8 +70,8 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     @Override
     public Object get(String path) {
         try {
-            return validate(path).get(path);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, null).get(path);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
@@ -73,8 +80,8 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     @Override
     public Integer getInt(String path) {
         try {
-            return validate(path).getInt(path);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, null).getInt(path);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
@@ -83,8 +90,8 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     @Override
     public Long getLong(String path) {
         try {
-            return validate(path).getLong(path);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, null).getLong(path);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
@@ -93,17 +100,23 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     @Override
     public List<String> getStringList(String path) {
         try {
-            return validate(path).getStringList(path);
-        } catch (PathDoesNotExistException e) {
+            return validate(path, null).getStringList(path);
+        } catch (Exception e) {
             getPlugin().getLogging().log(e);
         }
         return null;
     }
 
     @Override
-    public FileConfiguration validate(String path) throws PathDoesNotExistException {
-        if(!isLoaded() || getConfiguration().get(path) == null)
+    public FileConfiguration validate(String path, String fallback) throws PathDoesNotExistException, IOException {
+        if(!isLoaded() || getConfiguration().get(path) == null) {
+            if(fallback != null) {
+                getConfiguration().set(path, fallback);
+                getConfiguration().save(getGFile().getFile());
+                return validate(path, null);
+            }
             throw new PathDoesNotExistException(getPlugin(), path, getGFile().getName());
+        }
         return getConfiguration();
     }
 

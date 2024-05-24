@@ -5,13 +5,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class QuitListener extends AbstractGListener {
 
-    public QuitListener(IMainframe plugin) {
+    public QuitListener(IMainframe<JavaPlugin> plugin) {
         super(plugin);
     }
 

@@ -2,6 +2,7 @@ package de.FSCode.ExtendedInventory.Listeners;
 
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import lombok.Getter;
+import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
 public enum GListeners {
@@ -18,7 +19,7 @@ public enum GListeners {
         this.listenerClass = listener;
     }
 
-    private void initialize(IMainframe plugin) {
+    private void initialize(IMainframe<JavaPlugin> plugin) {
         try {
             getListenerClass().getConstructor(IMainframe.class).newInstance(plugin);
         } catch (Exception ex) {
@@ -26,7 +27,7 @@ public enum GListeners {
         }
     }
 
-    public static void initializeListeners(IMainframe plugin) {
+    public static void initializeListeners(IMainframe<JavaPlugin> plugin) {
         for(GListeners listener : GListeners.values()) listener.initialize(plugin);
     }
 

@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
 
@@ -25,7 +26,7 @@ public enum GItems {
     NEXT_PAGE("InventoryConfiguration.NextPageItem"),
     INDICATOR("InventoryConfiguration.IndicatorItem");
 
-    @Getter private static IMainframe plugin;
+    @Getter private static IMainframe<JavaPlugin> plugin;
 
     private final String path;
 

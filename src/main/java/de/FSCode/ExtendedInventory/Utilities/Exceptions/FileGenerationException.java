@@ -5,7 +5,7 @@ import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 
 public class FileGenerationException extends Exception {
 
-    public FileGenerationException(IMainframe plugin, GFiles file) {
+    public FileGenerationException(IMainframe<?> plugin, GFiles file) {
         plugin.sendConsoleMessage("%PREFIX% &cCould not generate file " + file.getName());
     }
 

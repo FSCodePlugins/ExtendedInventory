@@ -1,5 +1,6 @@
 package de.FSCode.ExtendedInventory;
 
+import de.FSCode.ExtendedInventory.Commands.ReloadCommand;
 import de.FSCode.ExtendedInventory.Listeners.GListeners;
 import de.FSCode.ExtendedInventory.MySQL.ConnectionManager;
 import de.FSCode.ExtendedInventory.MySQL.SQLInventoryManager;
@@ -16,7 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
-public final class ExtendedInventory extends JavaPlugin implements IMainframe {
+public final class ExtendedInventory extends JavaPlugin implements IMainframe<JavaPlugin> {
 
     private String prefix = "&7[&6EInv&7] |";
 
@@ -35,6 +36,7 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe {
 
                     this.inventoryHandler = getConnectionManager() != null ? new SQLInventoryManager(this) : new FlatFileInventoryManager(this);
                     GListeners.initializeListeners(this);
+                    getCommand("einv").setExecutor(new ReloadCommand(this));
                     this.prefix = GConfigs.PREFIX.getAsString(true);
                     sendConsoleMessage("%PREFIX% &aPlugin was loaded successfully! " + (getConnectionManager() != null ? "&a[&eMySQL connected&a]" : ""));
                     return;
@@ -48,9 +50,10 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe {
         Bukkit.getPluginManager().disablePlugin(this);
     }
 
-    private boolean setupConfigurations() {
+    public boolean setupConfigurations() {
         this.logging = new GLogging(this);
         this.configuration = new SpigotFileConfiguration(this, GFiles.CONFIG);
+        this.prefix = getConfiguration().getString("Prefix");
         this.messageConfiguration = new SpigotFileConfiguration(this, GFiles.MESSAGES);
         this.mysqlConfiguration = new SpigotFileConfiguration(this, GFiles.MYSQL);
         return getConfiguration().isLoaded()
@@ -86,6 +89,11 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe {
     }
 
     @Override
+    public boolean reload() {
+        return setupConfigurations();
+    }
+
+    @Override
     public String getPluginFolder() {
         return getDataFolder().getAbsolutePath();
     }
@@ -96,7 +104,7 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe {
     }
 
     @Override
-    public JavaPlugin getJavaPlugin() {
+    public JavaPlugin getPluginInstance() {
         return this;
     }
 

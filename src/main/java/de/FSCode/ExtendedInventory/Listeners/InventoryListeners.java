@@ -12,10 +12,11 @@ import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class InventoryListeners extends AbstractGListener {
 
-    public InventoryListeners(IMainframe plugin) {
+    public InventoryListeners(IMainframe<JavaPlugin> plugin) {
         super(plugin);
     }
 
