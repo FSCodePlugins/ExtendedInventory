@@ -1,5 +1,6 @@
 package de.FSCode.ExtendedInventory.Listeners;
 
+import de.FSCode.ExtendedInventory.Utilities.GPermissions;
 import de.FSCode.ExtendedInventory.Utilities.IMainframe;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,10 +25,15 @@ public class JoinListener extends AbstractGListener {
         getPlugin().getInventoryHandler().setControlItems(p);
         Bukkit.getScheduler().runTaskAsynchronously(getPlugin().getPluginInstance(), () -> {
             for(int i = 0; i <= 10; i++) {
-                if(p.isOnline() && p.hasPermission("extendedinventory.pages." + i))
+                getPlugin().getInventoryHandler().setAllowedPages(p.getUniqueId(), 0);
+                if(GPermissions.INV_PAGES.check(p, String.valueOf(i)))
                     getPlugin().getInventoryHandler().setAllowedPages(p.getUniqueId(), i);
             }
         });
+
+        if(getPlugin().isOutdated() && GPermissions.UPDATE_CHECK.check(p)) {
+            p.sendMessage(getPlugin().getPrefix() + " §7There is a new update available!");
+        }
     }
 
 }

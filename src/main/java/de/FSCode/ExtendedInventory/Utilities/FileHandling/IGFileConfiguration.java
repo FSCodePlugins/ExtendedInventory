@@ -20,7 +20,9 @@ public interface IGFileConfiguration<E> {
 
     public Long getLong(String path);
 
-    public Object get(String path);
+    public Object getObject(String path);
+
+    public Object getObjectForSetup(String path, String fallback);
 
     public List<String> getStringList(String path);
 

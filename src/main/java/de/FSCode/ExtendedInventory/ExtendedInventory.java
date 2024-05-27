@@ -21,6 +21,8 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe<Ja
 
     private String prefix = "&7[&6EInv&7] |";
 
+    private boolean outdated = false;
+
     private SpigotFileConfiguration configuration, messageConfiguration, mysqlConfiguration;
     private GLogging logging;
 
@@ -39,6 +41,14 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe<Ja
                     getCommand("einv").setExecutor(new ReloadCommand(this));
                     this.prefix = GConfigs.PREFIX.getAsString(true);
                     sendConsoleMessage("%PREFIX% &aPlugin was loaded successfully! " + (getConnectionManager() != null ? "&a[&eMySQL connected&a]" : ""));
+                    if(GConfigs.CHECK_UPDATES.getAsBoolean())
+                        new UpdateChecker(this).getVersion(newestVersion -> {
+                            if(!getDescription().getVersion().equals(newestVersion)) {
+                                outdated = true;
+                                sendConsoleMessage("%PREFIX% &6You are running an outdated version of ExtendedInventory!");
+                                sendConsoleMessage("%PREFIX% &6Please go to spigotmc.org and update to the latest version!");
+                            }
+                        });
                     return;
 
                 }
@@ -112,5 +122,8 @@ public final class ExtendedInventory extends JavaPlugin implements IMainframe<Ja
     public ConnectionManager getSQL() {
         return this.connectionManager;
     }
+
+    @Override
+    public boolean isOutdated() {return this.outdated;}
 
 }

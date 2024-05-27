@@ -68,11 +68,16 @@ public class SpigotFileConfiguration extends AbstractGFileConfiguration<FileConf
     }
 
     @Override
-    public Object get(String path) {
+    public Object getObject(String path) {
+        return getObjectForSetup(path, null);
+    }
+
+    @Override
+    public Object getObjectForSetup(String path, String fallback) {
         try {
-            return validate(path, null).get(path);
-        } catch (Exception e) {
-            getPlugin().getLogging().log(e);
+            return validate(path, fallback).get(path);
+        } catch (Exception ex) {
+            getPlugin().getLogging().log(ex);
         }
         return null;
     }

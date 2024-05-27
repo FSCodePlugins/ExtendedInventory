@@ -26,4 +26,8 @@ public interface IMainframe<T> {
 
     public boolean reload();
 
+    public boolean isOutdated();
+
+    public String getPrefix();
+
 }

@@ -3,6 +3,8 @@ Prefix: "&7[&6EInv&7] |"
 # If this option is enabled, the hotbar items will also be changed by switching pages
 IncludeHotbarItems: false
 
+CheckForUpdates: true
+
 InventoryConfiguration:
   NextPageItem:
     Name: "&aNext Page"
